@@ -1,0 +1,9 @@
+lightning==2.5.5
+jsonargparse[signatures]>=4.27.7
+nibabel==5.3.2
+numpy
+scipy==1.15.3
+torch
+torchdiffeq==0.2.5
+tqdm
+PyYAML

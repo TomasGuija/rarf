@@ -1,0 +1,66 @@
+trainer:
+  max_epochs: 500
+  accelerator: auto
+  devices: 1
+  precision: bf16-mixed
+  num_sanity_val_steps: 0
+  log_every_n_steps: 50
+  check_val_every_n_epoch: 1
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args:
+        monitor: val/loss
+        mode: min
+        save_top_k: 1
+        save_last: true
+        filename: "rarf-spatial-{epoch}-{val_loss:.4f}"
+        dirpath: "checkpoints"
+    - class_path: lightning.pytorch.callbacks.LearningRateMonitor
+      init_args:
+        logging_interval: step
+  logger:
+    - class_path: lightning.pytorch.loggers.CSVLogger
+      init_args:
+        save_dir: "outputs"
+        name: "rarf-spatial"
+  default_root_dir: outputs
+
+data:
+  data_dir: ""
+  val_data_dir: null
+  train_csv: null
+  val_csv: null
+  batch_size: 1
+  num_workers: 2
+  shuffle: true
+  train_split: 1.0
+  seed: 10
+  crop_shape: [166, 196, 152]
+  random_mask_variant: true
+  cache_dir: null
+  robust_percentile_lower: 0.5
+  robust_percentile: 99.5
+  image_augment: true
+  loss_mask_mode: healthy
+
+model:
+  lr: 1.0e-4
+  weight_decay: 1e-4
+  path_mode: inpaint
+  conditioning_mode: spatial
+  time_sampling: uniform
+  flow_steps: 1000
+  flow_loss: l2
+  recon_loss: mse
+  recon_loss_weight: 0.0
+  sample_steps: 32
+
+  image_channels: 1
+  spatial_dims: 3
+  mask_conditioning: false
+  model_channels: 32
+  num_res_blocks: 2
+  channel_mult: [1, 2, 4]
+  dropout: 0.05
+  weights_path: ""
+  use_ema: true

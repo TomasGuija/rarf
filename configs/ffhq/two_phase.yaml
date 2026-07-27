@@ -1,0 +1,85 @@
+# Train an attention-free, two-phase RARF from scratch on FFHQ at 256x256.
+trainer:
+  max_steps: 300000
+  accelerator: auto
+  devices: 1
+  precision: bf16-mixed
+  # Four samples per device with four accumulated batches gives an effective
+  # batch size of 16 on one GPU, while keeping 256x256 activations manageable.
+  accumulate_grad_batches: 4
+  num_sanity_val_steps: 0
+  log_every_n_steps: 50
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args:
+        every_n_train_steps: 10000
+        save_top_k: -1
+        save_last: true
+        filename: "rarf-ffhq-{step}"
+        dirpath: "checkpoints/ffhq"
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args:
+        monitor: val/loss
+        mode: min
+        save_top_k: 1
+        filename: "rarf-ffhq-best-{epoch}-{step}"
+        dirpath: "checkpoints/ffhq"
+    - class_path: lightning.pytorch.callbacks.LearningRateMonitor
+      init_args:
+        logging_interval: step
+  logger:
+    - class_path: lightning.pytorch.loggers.CSVLogger
+      init_args:
+        save_dir: "outputs"
+        name: "rarf-ffhq"
+  default_root_dir: outputs/ffhq
+
+data:
+  # This is the FFHQ source used by RAD's released training script. A local
+  # image directory can be used instead with `data_dir` and `dataset_name: null`.
+  dataset_name: "merkol/ffhq-256"
+  data_dir: null
+  # Optional named variant for Hugging Face datasets that publish multiple configs.
+  dataset_config_name: null
+  # Hugging Face column containing the image; ignored when using `data_dir`.
+  image_column: image
+  cache_dir: null
+  resolution: 256
+  batch_size: 4
+  num_workers: 8
+  shuffle: true
+  random_crop: true
+  random_flip: false
+  # Used only when the source does not provide a `validation` split.
+  validation_size: 0.03
+  split_seed: 42
+
+  # RAD samples the Perlin scale and threshold over their complete ranges.
+  mask_min_scale: 1.0
+  mask_max_scale: null
+  min_hole_fraction: 0.1
+  max_hole_fraction: 0.9
+
+model:
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  path_mode: two_phase
+  conditioning_mode: spatial
+  time_sampling: uniform
+  phase_boundary: 0.5
+  flow_steps: 1000
+  flow_loss: l2
+  recon_loss: mse
+  recon_loss_weight: 0.0
+  sample_steps: 100
+
+  image_channels: 3
+  spatial_dims: 2
+  mask_conditioning: false
+  model_channels: 32
+  num_res_blocks: 2
+  channel_mult: [1, 2, 4]
+  dropout: 0.1
+  weights_path: ""
+  use_ema: true
+  ema_decay: 0.999

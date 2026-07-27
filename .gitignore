@@ -1,0 +1,28 @@
+# Python artifacts and environments.
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Local datasets, checkpoints, caches, and generated outputs.
+/data/
+/checkpoints/
+/outputs/
+/outputs_*/
+/outdated_data/
+/outdated_outputs/
+*.ckpt
+*.pt
+*.pth
+
+# Editor and operating-system metadata.
+.idea/
+.vscode/
+.DS_Store
