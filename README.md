@@ -1,4 +1,5 @@
 # RARF: Region-Aware Rectified Flows
+[![arXiv](https://img.shields.io/badge/arXiv-2609.03956-b31b1b.svg)](https://arxiv.org/abs/2609.03956)
 
 This repository contains a task-agnostic implementation of **Region-Aware Rectified Flows**.
 The repository separates the generative method from the specific application to the [BraTS 2026 inpainting challenge](https://www.synapse.org/Synapse:syn74274097/wiki/639571) submission, which was the original use-case for the method.
