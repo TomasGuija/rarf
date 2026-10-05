@@ -1,5 +1,6 @@
 # RARF: Region-Aware Rectified Flows
 [![arXiv](https://img.shields.io/badge/arXiv-2609.03956-b31b1b.svg)](https://arxiv.org/abs/2609.03956)
+[![MICCAI 2026](https://img.shields.io/badge/MICCAI-2026-0055A4.svg)](https://papers.miccai.org/miccai-2026-sat/BraTS_Inpainting_013.html)
 
 This repository contains a task-agnostic implementation of **Region-Aware Rectified Flows**.
 The repository separates the generative method from the specific application to the [BraTS 2026 inpainting challenge](https://www.synapse.org/Synapse:syn74274097/wiki/639571) submission, which was the original use-case for the method.
@@ -187,7 +188,18 @@ convert existing checkpoints.
 
 ## Citation
 
-The citation for RARF is coming soon.
+```bibtex
+@InProceedings{GuiTom_RARF_MICCAISAT2026,
+  author    = {Guija-Valiente, Tomás and Rodríguez-González, Blanca and Malpica, Norberto and Torrado-Carvajal, Ángel},
+  title     = {RARF: Region-Aware Rectified Flows for 3D Brain MRI Inpainting},
+  booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2026 Workshops and Challenges},
+  year      = {2026},
+  publisher = {Springer Nature Switzerland},
+  volume    = {LNCS 17254},
+  month     = {pending},
+  pages     = {pending}
+}
+```
 
 ## License
 
