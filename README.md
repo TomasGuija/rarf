@@ -216,5 +216,3 @@ and terms.
 3. Ujjwal Baid, Satyam Ghodasara, Suyash Mohan, et al. **“The RSNA-ASNR-MICCAI BraTS 2021 Benchmark on Brain Tumor Segmentation and Radiogenomic Classification.”** *arXiv preprint arXiv:2107.02314*, 2021. [arXiv:2107.02314](https://arxiv.org/abs/2107.02314).
 
 4. Florian Kofler, Felix Meissen, Felix Steinbauer, et al. **“The Brain Tumor Segmentation (BraTS) Challenge: Local Synthesis of Healthy Brain Tissue via Inpainting.”** *arXiv preprint arXiv:2305.08992*, 2024. [arXiv:2305.08992](https://arxiv.org/abs/2305.08992).
-
-5. Tero Karras, Samuli Laine, and Timo Aila. **“A Style-Based Generator Architecture for Generative Adversarial Networks.”** *2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 4401–4410, 2019. [CVF Open Access](https://openaccess.thecvf.com/content_CVPR_2019/html/Karras_A_Style-Based_Generator_Architecture_for_Generative_Adversarial_Networks_CVPR_2019_paper.html).
